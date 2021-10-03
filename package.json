@@ -22,6 +22,7 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "typescript": "~4.1.5",
+    "vue-cli-plugin-pug": "~2.0.0",
     "vue-template-compiler": "^2.6.11",
     "vuex-class": "^0.3.2",
     "vuex-module-decorators": "^1.0.1"
