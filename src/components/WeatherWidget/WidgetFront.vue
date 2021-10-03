@@ -19,7 +19,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component({
   name: 'WidgetFront',
 })
-export default class WidgetFront extends Vue {}
+export default class WidgetFront extends Vue {
+  mounted() {
+    this.$store.dispatch('weather/loadData');
+  }
+}
 </script>
 
 <style scoped lang="scss">

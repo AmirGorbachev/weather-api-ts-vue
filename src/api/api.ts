@@ -1,8 +1,20 @@
 const axios = require('axios');
-let apiKey = '0249f00b29849a2ef01cc8243ab3e031';
-let city = 'Moscow';
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&units=metric&appid=${apiKey}`;
 
-axios.get(url).then((res) => {
-  console.log(res.data);
-});
+export default class WeatherApi {
+  constructor() {}
+
+  async loadData(): Promise<Object> {
+    let result = {};
+    let apiKey = '0249f00b29849a2ef01cc8243ab3e031';
+    let city = 'Moscow';
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&units=metric&appid=${apiKey}`;
+
+    await axios.get(url).then((data: any) => {
+      result = data.data;
+    });
+
+    return result;
+  }
+}
+
+export { WeatherApi };
