@@ -1,27 +1,45 @@
 <template lang="pug">
   .widget-front
     .widget-front__head
-      p.widget-front__location London, UK
-      .widget-front__settings-icon vfvf
+      //- pre weatherData: {{weatherData}}
+      p.widget-front__location {{weatherData.name}}
+      .widget-front__settings-icon(click='openSettings')
     .widget-front__content
       .widget-front__temperature.temperature
         .temperature__icon
-        span.temperature__value 7 C
-      p.widget-front__description Feels like -3 C. Broken clouds. Light breeze
+        span.temperature__value {{weatherData.main.temp}}&#176;C
+      p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description}}
       .widget-front__data.widget-front__data_icons
+        .widget-front__data-item.data-item
+          .data-item__icon
+          .data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
+        .widget-front__data-item.data-item
+          .data-item__icon
+          .data-item__value {{weatherData.main.pressure}}Pa
       .widget-front__data.widget-front__data_descriptions
-        .widget-front__data-item
+        .widget-front__data-item.data-item
+          .data-item__title Humidity:
+          .data-item__value {{weatherData.main.humidity}}%
+        .widget-front__data-item.data-item
+          .data-item__title Visibility:
+          .data-item__value {{weatherData.visibility / 1000}} km
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
 @Component({
   name: 'WidgetFront',
 })
 export default class WidgetFront extends Vue {
-  mounted() {
-    this.$store.dispatch('weather/loadData');
+  private get weatherData(): Object {
+    return this.$store.getters['weather/weatherData'];
+  }
+
+  @Emit()
+  openSettings(): void {
+    console.log(878)
+    this.showSettings = true
   }
 }
 </script>
@@ -31,6 +49,8 @@ export default class WidgetFront extends Vue {
 }
 
 .widget-front__head {
+  display: flex;
+  justify-content: space-between;
 }
 
 .widget-front__location {
@@ -41,8 +61,9 @@ export default class WidgetFront extends Vue {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .widget-front__content {
@@ -61,6 +82,9 @@ export default class WidgetFront extends Vue {
 }
 
 .widget-front__data {
+  display: flex;
+  justify-content: space-between;
+
   &_icons {
   }
 
@@ -69,5 +93,7 @@ export default class WidgetFront extends Vue {
 }
 
 .widget-front__data-item {
+  text-align: left;
+  width: 50%;
 }
 </style>

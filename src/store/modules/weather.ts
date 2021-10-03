@@ -7,14 +7,17 @@ class Weather extends VuexModule {
   public data: Object = {};
 
   @Mutation
-  // public setName(newName: string): void {
-  //   this.name = newName
-  // }
+  public saveData(data: Object): void {
+    this.data = data;
+  }
+  get weatherData(): Object {
+    return this.data;
+  }
   @Action({ rawError: true })
   async loadData(): Promise<void> {
-    let data = await this.api.loadData();
+    const data = await this.api.loadData();
     console.log(data);
-    // this.context.commit('setName', newName)
+    this.context.commit('saveData', data);
   }
 }
 

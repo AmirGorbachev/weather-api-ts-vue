@@ -1,6 +1,6 @@
 <template lang="pug">
   .weather-widget
-    WidgetFront(v-if="!showSettings")
+    WidgetFront(v-if="!showSettings" :open-settings='openSettings')
     WidgetSettings(v-else)
 </template>
 
@@ -17,7 +17,15 @@ import WidgetSettings from './WidgetSettings.vue';
   },
 })
 export default class WeatherWidget extends Vue {
+  mounted() {
+    this.$store.dispatch('weather/loadData');
+  }
+
   private showSettings: Boolean = false;
+
+  openSettings() {
+    this.showSettings = true
+  }
 }
 </script>
 
