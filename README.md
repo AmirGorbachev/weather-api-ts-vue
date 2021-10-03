@@ -1,4 +1,4 @@
-# njnnjn
+# weather-api-ts-vue
 
 ## Project setup
 ```
