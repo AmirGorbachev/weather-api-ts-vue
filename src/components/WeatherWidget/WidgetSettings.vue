@@ -1,7 +1,6 @@
-<template>
-  <div class="widget-settings">
-    <p>WidgetSettings</p>
-  </div>
+<template lang="pug">
+  .widget-settings
+    p WidgetSettings
 </template>
 
 <script lang="ts">

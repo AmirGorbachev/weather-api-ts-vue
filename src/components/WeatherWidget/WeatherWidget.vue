@@ -1,8 +1,7 @@
-<template>
-  <div class="weather-widget">
-    <WidgetFront v-if="!showSettings" />
-    <WidgetSettings v-else />
-  </div>
+<template lang="pug">
+  .weather-widget
+    WidgetFront(v-if="!showSettings")
+    WidgetSettings(v-else)
 </template>
 
 <script lang="ts">
