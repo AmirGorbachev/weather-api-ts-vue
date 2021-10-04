@@ -24,24 +24,15 @@ export default class WeatherWidget extends Vue {
   private showSettings: Boolean = false;
 
   openSettings() {
-    this.showSettings = true
+    this.showSettings = true;
   }
 }
 </script>
 
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.weather-widget {
+  width: 400px;
+  background: #cfd6fa;
+  padding: 10px;
 }
 </style>
