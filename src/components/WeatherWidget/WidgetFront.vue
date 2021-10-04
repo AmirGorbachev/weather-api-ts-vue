@@ -1,29 +1,29 @@
 <template lang="pug">
   .widget-front
     .widget-front__settings-icon(@click='openSettings')
-    .widget-front__location-item(v-for='weatherData in weatherDataArray')
+    .widget-front__location-item(v-for='weatherData in weatherDataArray' :key='weatherData.id')
       .widget-front__head
         //- pre weatherData: {{weatherData}}
         p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
       .widget-front__content
         .widget-front__temperature.temperature
           .temperature__icon
-          span.temperature__value {{weatherData.main.temp}}&#176;C
+          p.temperature__value {{weatherData.main.temp}}&#176;C
         p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description}}
         .widget-front__data.widget-front__data_icons
           .widget-front__data-item.data-item
-            .data-item__icon Wind:&nbsp;
-            .data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
+            p.data-item__icon Wind:&nbsp;
+            p.data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
           .widget-front__data-item.data-item
-            .data-item__icon Pressure:&nbsp;
-            .data-item__value {{weatherData.main.pressure}}hPa
+            p.data-item__icon Pressure:&nbsp;
+            p.data-item__value {{weatherData.main.pressure}}hPa
         .widget-front__data.widget-front__data_descriptions
           .widget-front__data-item.data-item
-            .data-item__title Humidity:&nbsp;
-            .data-item__value {{weatherData.main.humidity}}%
+            p.data-item__title Humidity:&nbsp;
+            p.data-item__value {{weatherData.main.humidity}}%
           .widget-front__data-item.data-item
-            .data-item__title Visibility:&nbsp;
-            .data-item__value {{weatherData.visibility / 1000}} km
+            p.data-item__title Visibility:&nbsp;
+            p.data-item__value {{weatherData.visibility / 1000}} km
 </template>
 
 <script lang="ts">
@@ -33,7 +33,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
   name: 'WidgetFront',
 })
 export default class WidgetFront extends Vue {
-  showSettings = false;
+  private showSettings = false;
 
   private get weatherDataArray(): Object {
     return this.$store.getters['weather/weatherData'];
@@ -55,7 +55,7 @@ export default class WidgetFront extends Vue {
 .widget-front__settings-icon {
   background-image: url('../../assets/icons/settings.svg');
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
