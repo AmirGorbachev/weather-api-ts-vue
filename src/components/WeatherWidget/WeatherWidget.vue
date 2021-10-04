@@ -18,6 +18,13 @@ import WidgetSettings from './WidgetSettings.vue';
 })
 export default class WeatherWidget extends Vue {
   mounted() {
+    if (localStorage.locations) {
+      this.$store.commit(
+        'weather/updateLocations',
+        localStorage.locations.split(',')
+      );
+    }
+
     this.loadData();
   }
 

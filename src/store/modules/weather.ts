@@ -6,7 +6,7 @@ class Weather extends VuexModule {
   // init api
   private api = new WeatherApi();
   // state
-  private locations: String[] = ['Moscow', 'London'];
+  private locations: String[] = ['Moscow'];
   private weatherForLocations: Object[] = [];
 
   @Mutation
@@ -17,16 +17,22 @@ class Weather extends VuexModule {
   @Mutation
   public pushNewLocation(location: String): void {
     this.locations.push(location);
+
+    localStorage.locations = this.locations;
   }
 
   @Mutation
   public updateLocations(locations: String[]): void {
     this.locations = locations;
+
+    localStorage.locations = this.locations;
   }
 
   @Mutation
   public removeLocation(location: String): void {
     this.locations = this.locations.filter((item) => item !== location);
+
+    localStorage.locations = this.locations;
   }
 
   @Mutation

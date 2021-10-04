@@ -29,6 +29,7 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin-bottom: 60px;
   display: flex;
   justify-content: space-around;
 }

@@ -1,6 +1,5 @@
 <template lang="pug">
   .widget-settings
-    p {{locationsArray}}
     .widget-settings__head
       p.widget-settings__title Settings
       .widget-settings__close-btn(@click='hideSettings')
