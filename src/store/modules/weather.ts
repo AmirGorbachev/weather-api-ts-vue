@@ -20,6 +20,11 @@ class Weather extends VuexModule {
   }
 
   @Mutation
+  public updateLocations(locations: String[]): void {
+    this.locations = locations;
+  }
+
+  @Mutation
   public removeLocation(location: String): void {
     this.locations = this.locations.filter((item) => item !== location);
   }
@@ -35,7 +40,6 @@ class Weather extends VuexModule {
 
     for (let item in this.locations) {
       const data = await this.api.loadData(this.locations[item]);
-      console.log(data);
       this.context.commit('saveNewWeatherData', data);
     }
   }

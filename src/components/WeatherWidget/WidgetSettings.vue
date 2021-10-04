@@ -5,7 +5,7 @@
       p.widget-settings__title Settings
       .widget-settings__close-btn(@click='hideSettings')
     .widget-settings__location-list(ref='locationList')
-      .widget-settings__location-item(v-for='location in locationsArray' :key='location' draggable="true")
+      .widget-settings__location-item(v-for='location in locationsArray' :key='location' ref='locationItem' draggable="true")
         .widget-settings__content
           .widget-settings__drag-icon
           p.widget-settings__value {{location}}
@@ -42,7 +42,6 @@ export default class WidgetSettings extends Vue {
   private addNewLocation(): void {
     this.$store.commit('weather/pushNewLocation', this.inputValue);
     this.inputValue = '';
-    this.update();
   }
 
   private removeLocation(location: String): void {
@@ -55,6 +54,16 @@ export default class WidgetSettings extends Vue {
 
   @Emit()
   private hideSettings(): void {
+    const values = [];
+    this.$refs.locationList
+      .querySelectorAll('.widget-settings__location-item')
+      .forEach((item) => {
+        values.push(item.textContent);
+      });
+
+    this.$store.commit('weather/updateLocations', values);
+    this.update();
+
     this.showSettings = false;
   }
 }

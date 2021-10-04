@@ -2,8 +2,6 @@ export default function dragAndDrop(classList, classItem) {
   const tasksListElement = document.querySelector(`.${classList}`);
   const taskElements = tasksListElement.querySelectorAll(`.${classItem}`);
 
-  console.log(taskElements[0].textContent)
-
   for (const task of taskElements) {
     task.draggable = true;
   }
