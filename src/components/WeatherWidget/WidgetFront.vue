@@ -1,7 +1,7 @@
 <template lang="pug">
   .widget-front
     .widget-front__settings-icon(@click='openSettings')
-    .widget-front__location-item
+    .widget-front__location-item(v-for='weatherData in weatherDataArray')
       .widget-front__head
         //- pre weatherData: {{weatherData}}
         p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
@@ -35,12 +35,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 export default class WidgetFront extends Vue {
   showSettings = false;
 
-  private get weatherData(): Object {
-    // Todo: check for empty data (render before load data)
-    // const weatherData = this.$store.getters['weather/weatherData'];
-    // console.log(weatherData);
-    // return weatherData ? weatherData : {};
-
+  private get weatherDataArray(): Object {
     return this.$store.getters['weather/weatherData'];
   }
 
@@ -70,10 +65,14 @@ export default class WidgetFront extends Vue {
 }
 
 .widget-front__location-item {
+  padding-bottom: 25px;
   margin-bottom: 25px;
+  border-bottom: 1px solid black;
 
   &:last-child {
+    padding-bottom: 0px;
     margin-bottom: 0px;
+    border-bottom: 1px solid transparent;
   }
 }
 

@@ -4,20 +4,23 @@ import WeatherApi from '../../api/api';
 @Module({ namespaced: true })
 class Weather extends VuexModule {
   private api = new WeatherApi();
-  public data: Object = {};
+  private locations = ['Moscow', 'London'];
+  private weatherForLocations: Object[] = [];
 
   @Mutation
-  public saveData(data: Object): void {
-    this.data = data;
+  public saveNewWeatherData(data: Object): void {
+    this.weatherForLocations.push(data);
   }
   get weatherData(): Object {
-    return this.data;
+    return this.weatherForLocations;
   }
   @Action({ rawError: true })
   async loadData(): Promise<void> {
-    const data = await this.api.loadData();
-    console.log(data);
-    this.context.commit('saveData', data);
+    for (let item in this.locations) {
+      const data = await this.api.loadData(this.locations[item]);
+      console.log(data);
+      this.context.commit('saveNewWeatherData', data);
+    }
   }
 }
 

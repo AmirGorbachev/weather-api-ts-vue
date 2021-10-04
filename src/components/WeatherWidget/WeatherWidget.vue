@@ -37,6 +37,6 @@ export default class WeatherWidget extends Vue {
 .weather-widget {
   width: 400px;
   background: #cfd6fa;
-  padding: 10px;
+  padding: 15px;
 }
 </style>
