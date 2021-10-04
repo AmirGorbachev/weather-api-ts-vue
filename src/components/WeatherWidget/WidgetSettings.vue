@@ -53,10 +53,10 @@ export default class WidgetSettings extends Vue {
 
   @Emit()
   private hideSettings(): void {
-    const values = [];
-    this.$refs.locationList
+    const values: String[] = [];
+    (this.$refs.locationList as any)
       .querySelectorAll('.widget-settings__location-item')
-      .forEach((item) => {
+      .forEach((item: any) => {
         values.push(item.textContent);
       });
 

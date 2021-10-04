@@ -6,7 +6,7 @@ class Weather extends VuexModule {
   // init api
   private api = new WeatherApi();
   // state
-  private locations: String[] = ['Moscow'];
+  private locations: String[] = [];
   private weatherForLocations: Object[] = [];
 
   @Mutation
@@ -45,9 +45,23 @@ class Weather extends VuexModule {
     this.context.commit('cleanWeatherData');
 
     for (let item in this.locations) {
-      const data = await this.api.loadData(this.locations[item]);
+      const data = await this.api.loadDataByCity(this.locations[item]);
       this.context.commit('saveNewWeatherData', data);
     }
+  }
+
+  @Action({ rawError: true })
+  async loadDataByCoords(): Promise<void> {
+    let data = {};
+
+    await navigator.geolocation.getCurrentPosition(async (position) => {
+      data = await this.api.loadDataByCoords(
+        (position.coords.latitude as unknown) as Number,
+        (position.coords.longitude as unknown) as Number
+      );
+
+      this.context.commit('saveNewWeatherData', data);
+    });
   }
 
   get weatherData(): Object[] {

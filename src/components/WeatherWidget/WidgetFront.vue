@@ -3,7 +3,6 @@
     .widget-front__settings-icon(@click='openSettings')
     .widget-front__location-item(v-for='weatherData in weatherDataArray' :key='weatherData.id')
       .widget-front__head
-        //- pre weatherData: {{weatherData}}
         p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
       .widget-front__content
         .widget-front__temperature.temperature
