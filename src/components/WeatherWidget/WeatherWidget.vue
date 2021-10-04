@@ -1,7 +1,7 @@
 <template lang="pug">
   .weather-widget
-    WidgetFront(v-if="!showSettings" :open-settings='openSettings')
-    WidgetSettings(v-else)
+    WidgetFront(v-if="!showSettings" v-on:open-settings='openSettings')
+    WidgetSettings(v-else v-on:hide-settings='hideSettings')
 </template>
 
 <script lang="ts">
@@ -23,8 +23,12 @@ export default class WeatherWidget extends Vue {
 
   private showSettings: Boolean = false;
 
-  openSettings() {
+  private openSettings(): void {
     this.showSettings = true;
+  }
+
+  private hideSettings(): void {
+    this.showSettings = false;
   }
 }
 </script>

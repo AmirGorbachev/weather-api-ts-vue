@@ -1,28 +1,29 @@
 <template lang="pug">
   .widget-front
-    .widget-front__head
-      //- pre weatherData: {{weatherData}}
-      p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
-      .widget-front__settings-icon(@click='openSettings')
-    .widget-front__content
-      .widget-front__temperature.temperature
-        .temperature__icon
-        span.temperature__value {{weatherData.main.temp}}&#176;C
-      p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description}}
-      .widget-front__data.widget-front__data_icons
-        .widget-front__data-item.data-item
-          .data-item__icon Wind:&nbsp;
-          .data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
-        .widget-front__data-item.data-item
-          .data-item__icon Pressure:&nbsp;
-          .data-item__value {{weatherData.main.pressure}}hPa
-      .widget-front__data.widget-front__data_descriptions
-        .widget-front__data-item.data-item
-          .data-item__title Humidity:&nbsp;
-          .data-item__value {{weatherData.main.humidity}}%
-        .widget-front__data-item.data-item
-          .data-item__title Visibility:&nbsp;
-          .data-item__value {{weatherData.visibility / 1000}} km
+    .widget-front__settings-icon(@click='openSettings')
+    .widget-front__location-item
+      .widget-front__head
+        //- pre weatherData: {{weatherData}}
+        p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
+      .widget-front__content
+        .widget-front__temperature.temperature
+          .temperature__icon
+          span.temperature__value {{weatherData.main.temp}}&#176;C
+        p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description}}
+        .widget-front__data.widget-front__data_icons
+          .widget-front__data-item.data-item
+            .data-item__icon Wind:&nbsp;
+            .data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
+          .widget-front__data-item.data-item
+            .data-item__icon Pressure:&nbsp;
+            .data-item__value {{weatherData.main.pressure}}hPa
+        .widget-front__data.widget-front__data_descriptions
+          .widget-front__data-item.data-item
+            .data-item__title Humidity:&nbsp;
+            .data-item__value {{weatherData.main.humidity}}%
+          .widget-front__data-item.data-item
+            .data-item__title Visibility:&nbsp;
+            .data-item__value {{weatherData.visibility / 1000}} km
 </template>
 
 <script lang="ts">
@@ -38,14 +39,13 @@ export default class WidgetFront extends Vue {
     // Todo: check for empty data (render before load data)
     // const weatherData = this.$store.getters['weather/weatherData'];
     // console.log(weatherData);
-    // return weatherData.main ? weatherData : {};
+    // return weatherData ? weatherData : {};
 
     return this.$store.getters['weather/weatherData'];
   }
 
   @Emit()
-  openSettings(): void {
-    console.log(878);
+  private openSettings(): void {
     this.showSettings = true;
   }
 }
@@ -53,6 +53,28 @@ export default class WidgetFront extends Vue {
 
 <style scoped lang="scss">
 .widget-front {
+  font-size: 18px;
+  position: relative;
+}
+
+.widget-front__settings-icon {
+  background-image: url('../../assets/icons/settings.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.widget-front__location-item {
+  margin-bottom: 25px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .widget-front__head {
@@ -65,16 +87,6 @@ export default class WidgetFront extends Vue {
 .widget-front__location {
 }
 
-.widget-front__settings-icon {
-  background-image: url('../../assets/icons/settings.svg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
 .widget-front__content {
 }
 
@@ -85,6 +97,7 @@ export default class WidgetFront extends Vue {
 }
 
 .temperature__value {
+  font-size: 24px;
 }
 
 .widget-front__description {
