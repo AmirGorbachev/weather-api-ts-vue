@@ -3,7 +3,7 @@
     .widget-front__head
       //- pre weatherData: {{weatherData}}
       p.widget-front__location {{weatherData.name}}, {{weatherData.sys.country}}
-      .widget-front__settings-icon(click='openSettings')
+      .widget-front__settings-icon(@click='openSettings')
     .widget-front__content
       .widget-front__temperature.temperature
         .temperature__icon
@@ -32,11 +32,15 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
   name: 'WidgetFront',
 })
 export default class WidgetFront extends Vue {
-  private get weatherData(): Object {
-    const weatherData = this.$store.getters['weather/weatherData'];
-    console.log(878);
+  showSettings = false;
 
-    return weatherData.main ? weatherData : {};
+  private get weatherData(): Object {
+    // Todo: check for empty data (render before load data)
+    // const weatherData = this.$store.getters['weather/weatherData'];
+    // console.log(weatherData);
+    // return weatherData.main ? weatherData : {};
+
+    return this.$store.getters['weather/weatherData'];
   }
 
   @Emit()
