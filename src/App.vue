@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <WeatherWidget />
+    <p>Cities for the test: Moscow, London, Pekin, Paris</p>
+    <div class="widget">
+      <WeatherWidget />
+    </div>
   </div>
 </template>
 
@@ -28,8 +31,12 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
   margin-bottom: 60px;
+}
+
+.widget {
+  margin-top: 20px;
   display: flex;
   justify-content: space-around;
 }
