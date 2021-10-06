@@ -3,8 +3,8 @@
     .widget-settings__head
       p.widget-settings__title Settings
       .widget-settings__close-btn(@click='hideSettings')
-    .widget-settings__location-list(ref='locationList')
-      .widget-settings__location-item(v-for='location in locationsArray' :key='location' ref='locationItem' draggable="true")
+    .widget-settings__location-list.js-location-list(ref='locationList')
+      .widget-settings__location-item.js-location-item(v-for='location in locationsArray' :key='location')
         .widget-settings__content
           .widget-settings__drag-icon
           p.widget-settings__value {{location}}
@@ -26,10 +26,7 @@ import dragAndDrop from '@/helpers/dragAndDrop.js';
 })
 export default class WidgetSettings extends Vue {
   mounted() {
-    dragAndDrop(
-      'widget-settings__location-list',
-      'widget-settings__location-item'
-    );
+    dragAndDrop('js-location-list', 'js-location-item');
   }
 
   private showSettings = true;
@@ -56,7 +53,7 @@ export default class WidgetSettings extends Vue {
   private hideSettings(): void {
     const values: String[] = [];
     (this.$refs.locationList as any)
-      .querySelectorAll('.widget-settings__location-item')
+      .querySelectorAll('.js-location-item')
       .forEach((item: any) => {
         values.push(item.textContent);
       });
