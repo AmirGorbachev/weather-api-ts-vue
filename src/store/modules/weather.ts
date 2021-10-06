@@ -54,14 +54,20 @@ class Weather extends VuexModule {
   async loadDataByCoords(): Promise<void> {
     let data = {};
 
-    await navigator.geolocation.getCurrentPosition(async (position) => {
-      data = await this.api.loadDataByCoords(
-        (position.coords.latitude as unknown) as Number,
-        (position.coords.longitude as unknown) as Number
-      );
+    await navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        data = await this.api.loadDataByCoords(
+          (position.coords.latitude as unknown) as Number,
+          (position.coords.longitude as unknown) as Number
+        );
 
-      this.context.commit('saveNewWeatherData', data);
-    });
+        this.context.commit('saveNewWeatherData', data);
+      },
+      async (error) => {
+        this.context.commit('pushNewLocation', 'Moscow');
+        this.context.dispatch('loadData');
+      }
+    );
   }
 
   get weatherData(): Object[] {

@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <p>
+      If the user has not given access to geolocation, then the default city is
+      Moscow.
+    </p>
     <p>Cities for the test: Moscow, London, Pekin, Paris</p>
     <div class="widget">
       <WeatherWidget />
