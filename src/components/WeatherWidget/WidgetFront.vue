@@ -8,11 +8,11 @@
         .widget-front__temperature.temperature
           .temperature__icon
           p.temperature__value {{weatherData.main.temp}}&#176;C
-        p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description}}
+        p.widget-front__description Feels like {{weatherData.main.feels_like}}&#176;C. {{weatherData.weather[0].description.charAt(0).toUpperCase() + weatherData.weather[0].description.slice(1)}}.
         .widget-front__data.widget-front__data_icons
           .widget-front__data-item.data-item
             p.data-item__icon Wind:&nbsp;
-            p.data-item__value {{weatherData.wind.speed}}m/s {{weatherData.wind.deg}}
+            p.data-item__value {{weatherData.wind.speed}}m/s
           .widget-front__data-item.data-item
             p.data-item__icon Pressure:&nbsp;
             p.data-item__value {{weatherData.main.pressure}}hPa
