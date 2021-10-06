@@ -18,7 +18,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import dragAndDrop from '../../helpers/dragAndDrop';
+// @ts-ignore
+import dragAndDrop from '@/helpers/dragAndDrop.js';
 
 @Component({
   name: 'WidgetSettings',
